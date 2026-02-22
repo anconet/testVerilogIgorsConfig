@@ -1,0 +1,51 @@
+[*]
+[*] GTKWave Analyzer v4.0.0-prealpha (cb68109) (w)1999-2022 BSI
+[*] Sun Feb 22 17:24:27 2026
+[*]
+[dumpfile] "/workspaces/testVerilogIgorsConfig/counter_tb.vcd"
+[dumpfile_mtime] "Sun Feb 22 17:03:50 2026"
+[dumpfile_size] 820
+[savefile] "/workspaces/testVerilogIgorsConfig/counter_tb.gtkw"
+[timestart] 0
+[size] 1427 600
+[pos] -1 -1
+*-14.609652 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[markername] AA
+[markername] BB
+[markername] CC
+[markername] DD
+[markername] EE
+[markername] FF
+[markername] GG
+[markername] HH
+[markername] II
+[markername] JJ
+[markername] KK
+[markername] LL
+[markername] MM
+[markername] NN
+[markername] OO
+[markername] PP
+[markername] QQ
+[markername] RR
+[markername] SS
+[markername] TT
+[markername] UU
+[markername] VV
+[markername] WW
+[markername] XX
+[markername] YY
+[markername] ZZ
+[treeopen] counter_tb.
+[sst_width] 297
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 319
+@28
+counter_tb.uut.clk
+counter_tb.uut.rst
+counter_tb.uut.en
+@22
+counter_tb.uut.count[7:0]
+[pattern_trace] 1
+[pattern_trace] 0
