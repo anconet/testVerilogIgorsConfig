@@ -1,8 +1,17 @@
 #!/bin/bash
 set -xe
- 
-apt update
-DEBIAN_FRONTEND=noninteractive apt install -y \
+sudo apt update
+
+# preseed timezone to prevent tzdata from asking questions during install
+sudo apt-get install -y --no-install-recommends debconf-utils
+# set timezone file/link early so dpkg knows our choice
+echo "America/Chicago" | sudo tee /etc/timezone > /dev/null
+sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime
+# debconf selections for tzdata interactive prompts
+echo "tzdata tzdata/Areas select America" | sudo debconf-set-selections
+echo "tzdata tzdata/Zones/America select Chicago" | sudo debconf-set-selections
+
+DEBIAN_FRONTEND=noninteractive sudo apt install -y --no-install-recommends \
     curl \
     dbus-x11 \
     git \
@@ -12,7 +21,10 @@ DEBIAN_FRONTEND=noninteractive apt install -y \
     python3-pip \
     universal-ctags \
     verilator \
-    wget
+    wget \
+    make \
+    vim \
+    less
 pip3 install \
     cocotb \
     cocotb-test \
@@ -35,6 +47,6 @@ if [[ ! -f $VERIBLE_TAR ]]; then
     wget https://github.com/chipsalliance/verible/releases/download/$VERIBLE_RELEASE/$VERIBLE_TAR
 fi
 if [[ ! -f "/usr/local/bin/verible-verilog-format" ]]; then
-    tar -C /usr/local --strip-components 1 -xf $VERIBLE_TAR
+    sudo tar -C /usr/local --strip-components 1 -xf $VERIBLE_TAR
 fi
 rm $VERIBLE_TAR

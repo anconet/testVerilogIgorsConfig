@@ -1,7 +1,10 @@
 {
     "name": "SystemVerilog Dev",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "remoteUser": "vscode",
-    "image": "ubuntu:jammy",
+    "containerUser": "vscode",
     "runArgs": [
         "--name",
         "systemVerilogDev"
@@ -14,7 +17,8 @@
         "vscode": {
             "extensions": [
                 "mshr-h.veriloghdl",
-                "ms-python.python"
+                "ms-python.python",
+                "mhutchie.git-graph"
             ]
         }
     }
