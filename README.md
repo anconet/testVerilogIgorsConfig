@@ -46,3 +46,19 @@ make uninstall             # respects INSTALL_DIR like the install rule
 This will delete each top‑level item listed in the record and then remove the
 record itself. If the record file is missing, the command will abort with an
 error message so it won’t accidentally wipe unrelated files.
+
+> **Note:** the uninstaller uses a record of the framework's own top-level
+> files, so it will *not* remove any other files already present in the
+> destination directory. It only deletes the entries that were installed by
+> `make install`.
+
+The list of files/directories copied by `make install` (and later removed by
+`make uninstall`) is defined in the framework itself via the
+`FRAMEWORK_ITEMS` variable in the `Makefile`:
+
+```
+FRAMEWORK_ITEMS := devcontainer vscode Makefile
+```
+
+Feel free to adjust this list if you add or remove support files from the
+framework; both install and uninstall will follow whatever names appear here.
