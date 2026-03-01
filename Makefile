@@ -3,8 +3,10 @@ SRCS := $(wildcard *.sv)
 
 # --------------------------- framework config ---------------------------
 # items that comprise the reusable framework. install/uninstall rely on
-# this list, so updating it here will affect both operations.
-FRAMEWORK_ITEMS := devcontainer vscode Makefile
+# this list, so updating it here will affect both operations.  Use the
+# actual names as they appear in the repo; directories are treated as such.
+# (many projects use the dot‑prefixed versions for VS Code/devcontainer.)
+FRAMEWORK_ITEMS := .devcontainer .vscode Makefile
 
 
 # Detect all testbenches
