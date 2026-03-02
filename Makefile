@@ -1,5 +1,5 @@
-# Gather all SystemVerilog files
-SRCS := $(wildcard *.sv)
+# Gather all Verilog/SystemVerilog source files (both .sv and .v)
+SRCS := $(wildcard ./verilog/*.sv ./verilog/*.v)
 
 # --------------------------- framework config ---------------------------
 # items that comprise the reusable framework. install/uninstall rely on
@@ -9,8 +9,8 @@ SRCS := $(wildcard *.sv)
 FRAMEWORK_ITEMS := .devcontainer .vscode Makefile
 
 
-# Detect all testbenches
-TBS := $(filter %_tb.sv,$(SRCS))
+# Detect all testbenches (either .sv or .v)
+TBS := $(filter %_tb.sv %_tb.v,$(SRCS))
 
 # Strip .sv extension
 TB_NAMES := $(basename $(TBS))
@@ -38,9 +38,9 @@ help:
 # Default: build all simulations
 all: $(SIMS)
 
-# Compile each testbench
-%.out: %.sv $(SRCS)
-	iverilog -g2012 -o $@ $^
+# Compile each testbench (supports .sv or .v extension)
+%.out: $(SRCS)
+	iverilog -g2012 -D"VCD_FILE=\"$(@:.out=.vcd)\"" -o $@ $^
 
 # Run each simulation to produce VCD
 %.vcd: %.out
@@ -57,9 +57,9 @@ waveform: $(VCDS)
 wave-%: %.vcd
 	gtkwave $<
 
-# Automatically re-run simulations when any .sv file changes
+# Automatically re-run simulations when any source file changes
 watch:
-	@ls *.sv | entr -c make run
+	@ls $(SRCS) | entr -c make run
 
 # Directory where the files will be installed. This is
 # the root of the new project (typically the parent dir
