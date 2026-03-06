@@ -1,5 +1,8 @@
-# Gather all Verilog/SystemVerilog source files (both .sv and .v)
-SRCS := $(wildcard ./verilog/*.sv ./verilog/*.v)
+SRCS_DIR := verilog
+
+# Gather all Verilog/SystemVerilog source files anywhere below the project root
+# use the shell because wildcard doesn't recurse
+SRCS := $(shell find ./$(SRCS_DIR) -type f \( -name '*.sv' -o -name '*.v' \))
 
 # --------------------------- framework config ---------------------------
 # items that comprise the reusable framework. install/uninstall rely on
@@ -59,7 +62,7 @@ wave-%: %.vcd
 
 # Automatically re-run simulations when any source file changes
 watch:
-	@ls $(SRCS) | entr -c make run
+	@printf '%s\n' $(SRCS) | entr -c make run
 
 # Directory where the files will be installed. This is
 # the root of the new project (typically the parent dir
